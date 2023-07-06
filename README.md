@@ -1,15 +1,8 @@
 This is TechLabs team project summer 2023
 
-## Getting Started
+## Figma Prototype Can Be Found Here
+https://www.figma.com/proto/srzya7iFCFzXl3rj0no28N/Team-Project?page-id=0%3A1&type=design&node-id=2-37&viewport=475%2C246%2C0.35&t=rLy7luu59rESQmaL-1&scaling=scale-down&starting-point-node-id=2%3A37&mode=design
 
-1. Get the file from GitHub to your computer run this command without $ sign
-    * $ git remote add origin <ssh URL Github>
-    * $ git clone <ssh URL Github>
+## Media Query Can Be Found Here
+https://github.com/HeppyAndriawan/Media_Query/blob/main/media_query.css
 
-2. Create new Branch : 
-    * $ git checkout -b <your name>
-    * $ git init
-    * git status
-    * $ git add .
-    * $ git commit -m "<the date you proceed commit>"
-    * $ git push origin <branch name> OR $ git push -f origin <branch name>

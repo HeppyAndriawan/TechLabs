@@ -1,0 +1,38 @@
+.RegisterMainRightFormInput {
+  width: 100%;
+  height: fit-content;
+}
+.RegisterMainRightFormInputContainer {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.RegisterMainRightFormInputContainer:last-child {
+  margin-bottom: 0;
+}
+.RegisterMainRightFormInputList {
+  width: 100%;
+  height: fit-content;
+  margin-bottom: 15px;
+}
+.RegisterMainRightFormInputList:last-child {
+  margin-bottom: 0;
+}
+
+.RegisterMainRightFormInputList .inputLable{
+  font-size: 12px;
+  font-weight: 500;
+}
+.RegisterMainRightFormInputList .inputError{
+  font-size: 10px;
+  font-weight: 300;
+  color: #eb5e5d;
+}
+.RegisterMainRightFormInputList input{
+  font-size: 13px;
+  font-weight: 300;
+}

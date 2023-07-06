@@ -1,0 +1,69 @@
+.RegisterContainer {
+  width: 100%;
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+}
+.RegisterMainContainer {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: auto;
+}
+.RegisterMainLeft {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("../../../public/images/signup.jpg");
+  background-color: #cccccc;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: brightness(0.9);
+}
+.RegisterMainRight {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.RegisterMainRightFormContainer {
+  width: 40%;
+  height: fit-content;
+}
+.RegisterMainRightFormHeader {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.RegisterMainRightFormHeader h1 {
+  font-size: 25px;
+  font-weight: 500;
+}
+.RegisterMainRightFormHeader p {
+  font-size: 15px;
+  font-weight: 300;
+}
+.RegisterMainRightFormHeaderIcon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.RegisterMainRightFormHeaderIcon svg{
+  width: 25px;
+  height: 25px;
+  color: #ffffff;
+}
