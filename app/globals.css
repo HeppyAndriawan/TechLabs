@@ -76,3 +76,35 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+.header {
+  width: 100%;
+  height: 64px;
+  background: #313131;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.header-image {
+  height: 70px;
+  filter: invert(1);
+  width: 150px;
+}
+
+.header-buttons {
+  display: flex;
+}
+
+.header-buttons li {
+  padding-right: 12px;
+  border-radius: 5px;
+}
+
+
+.header-buttons {
+  display: flex;
+}
