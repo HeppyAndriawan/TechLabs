@@ -19,7 +19,6 @@ export default function LoginForm() {
   const { styles } = MediaQuery(desktop, tablet, mobile, tablet);
   const { data: session, status } = useSession();
 
-
   // Check if authenticated then redirect to profile
   useEffect(() => {
     if (status === "authenticated") {
@@ -50,28 +49,30 @@ export default function LoginForm() {
       password: dataForm.user_password,
       redirect: false,
     }).then(({ ok, error }) => {
-      if (ok) {
-        router.push("/login");
-      } else {
+      console.log(error);
+      ok && router.push("/login");
+      if (error) {
         context.sendWarning(
           "alert",
           "Denied",
-          " `Error : ${error}, Credentials do not match, check your email and password!`"
+          `Error : ${error}, Credentials do not match, check your email and password!`
         );
-        reset(
-          {
-            USER_EMAIL: "",
-            USER_PASSWORD: "",
-          },
-          {
-            keepErrors: true,
-            keepDirty: true,
-            keepIsSubmitted: false,
-            keepTouched: false,
-            keepIsValid: false,
-            keepSubmitCount: false,
-          }
-        );
+        setTimeout(() => {
+          reset(
+            {
+              user_email: "",
+              user_password: "",
+            },
+            {
+              keepErrors: true,
+              keepDirty: true,
+              keepIsSubmitted: false,
+              keepTouched: false,
+              keepIsValid: false,
+              keepSubmitCount: false,
+            }
+          );
+        }, 500);
       }
       setIsRegisterButtonActive(false);
     });

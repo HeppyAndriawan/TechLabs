@@ -1,7 +1,7 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import MediaQuery from "@/tool/MediaQuery/MediaQuery";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import axios from "axios";
 import useSWR from "swr";
 import Image from "next/image";
@@ -51,6 +51,10 @@ export default function ProfileInformation() {
 
   // Fetch Data user
   const { data, isLoading } = useSWR("USER_LIST", getUserProfile);
+
+  // useEffect(() => {
+  //   data !== undefined && signOut({ callbackUrl: '/login' })
+  // }, [data]);
 
   return (
     styles !== null &&
