@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { CheckIcon } from "@radix-ui/react-icons";
 import MediaQuery from "@/tool/MediaQuery/MediaQuery";
 import SignupForm from "@/components/SignupForm/SignupForm";
@@ -19,11 +19,11 @@ export default function Register() {
           <div className={styles.RegisterMainRight}>
             <div className={styles.RegisterMainRightFormContainer}>
               <div className={styles.RegisterMainRightFormHeader}>
-                <div className={styles.RegisterMainRightFormHeaderIcon}>
+                {/* <div className={styles.RegisterMainRightFormHeaderIcon}>
                   <CheckIcon />
-                </div>
+                </div> */}
                 <h1>Join our community</h1>
-                <p>Start your journey with our product</p>
+                <p>Start your journey with our service</p>
               </div>
               <SignupForm />
             </div>

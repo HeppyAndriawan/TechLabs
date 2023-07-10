@@ -14,6 +14,15 @@
 .RegisterMainRightFormInputContainer:last-child {
   margin-bottom: 0;
 }
+.RegisterMainRightFormInputContainer h1 {
+  font-size: 12px;
+  font-weight: 300;
+}
+.RegisterMainRightFormInputContainer h1 button {
+  color: #6b7280;
+
+  margin-left: 3px;
+}
 .RegisterMainRightFormInputList {
   width: 100%;
   height: fit-content;
@@ -23,16 +32,16 @@
   margin-bottom: 0;
 }
 
-.RegisterMainRightFormInputList .inputLable{
+.RegisterMainRightFormInputList .inputLable {
   font-size: 12px;
   font-weight: 500;
 }
-.RegisterMainRightFormInputList .inputError{
+.RegisterMainRightFormInputList .inputError {
   font-size: 10px;
   font-weight: 300;
   color: #eb5e5d;
 }
-.RegisterMainRightFormInputList input{
+.RegisterMainRightFormInputList input {
   font-size: 13px;
   font-weight: 300;
 }

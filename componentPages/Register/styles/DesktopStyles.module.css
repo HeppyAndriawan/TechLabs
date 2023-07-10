@@ -32,8 +32,13 @@
   align-items: center;
 }
 .RegisterMainRightFormContainer {
-  width: 40%;
+  width: 45%;
   height: fit-content;
+  background-color: #ffffff;
+  padding: 30px;
+  margin-top: 50px;
+  box-shadow: -1px 2px 15px -1px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 .RegisterMainRightFormHeader {
   width: 100%;
@@ -62,7 +67,7 @@
   border-radius: 5px;
   margin-bottom: 15px;
 }
-.RegisterMainRightFormHeaderIcon svg{
+.RegisterMainRightFormHeaderIcon svg {
   width: 25px;
   height: 25px;
   color: #ffffff;

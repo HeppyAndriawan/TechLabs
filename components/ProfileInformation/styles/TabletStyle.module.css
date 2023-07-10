@@ -1,0 +1,164 @@
+.profileContainer {
+  width: 100%;
+  min-height: 40dvh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #eef0f3;
+  padding: 5vw 3vw;
+  border-radius: 10px;
+}
+.profileImageContainer {
+  width: 20.2vw;
+  height: 27vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.profileImageDotContainer {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: flex-start;
+}
+.profileImageDotContainer img {
+  width: 4vw;
+  height: 4vw;
+}
+.profileImageCircleContainer {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: flex-end;
+}
+.profileImageCircleContainer img {
+  width: 4vw;
+  height: 4vw;
+}
+.profileImageProfileContainer {
+  width: 20vw;
+  height: 27vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.profileImageProfile {
+  width: 17vw;
+  height: 24vw;
+  display: flex;
+  align-items: center;
+  box-shadow: -1px 2px 15px -1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.profileImageProfileContainer img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.profileImageProfileContainer .profileImageEmpty {
+  width: 17vw;
+  height: 24vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f7fb;
+  border-radius: 5px;
+}
+.profileImageProfileContainer .profileImageEmpty svg {
+  width: 4vw;
+  height: 4vw;
+  color: #6b7280;
+}
+
+.profileInfoContainer {
+  max-width: 70%;
+  min-height: 35dvh;
+  margin-left: 2vw;
+  margin-top: 1.5vw;
+}
+.profileInfoDetailContainer {
+  width: 100%;
+  height: fit-content;
+}
+.profileInfoDetailContainer h1 {
+  font-size: 2vw;
+  font-weight: 500;
+}
+.profileInfoDetailContainer h5 {
+  font-size: 1.5vw;
+  font-weight: 300;
+}
+.profileInfoDetailContainer p {
+  font-size: 1.5vw;
+  font-weight: 300;
+  margin-top: 2vw;
+  color: #6b7280;
+  font-style: italic;
+}
+.profileInfoAddressContainer {
+  margin-top: 7vw;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+}
+.profileInfoAddress {
+  width: 45%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-right: 3vw;
+}
+.profileInfoAddress:last-child {
+  margin-right: 0;
+}
+
+.profileInfoAddressIcon {
+  width: fit-content;
+  height: fit-content;
+}
+.profileInfoAddressIcon svg {
+  margin-top: 2.5px;
+}
+.profileInfoAddressInfo {
+  width: fit-content;
+  height: fit-content;
+  margin-left: 1vw;
+}
+.profileInfoAddressInfo h1 {
+  font-size: 1.5vw;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.profileInfoAddressInfo p {
+  font-size: 1.5vw;
+  font-weight: 300;
+  color: #6b7280;
+}
+
+/* .profileInfoAddress h1 {
+    font-size: 1.5vw;
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .profileInfoAddress h1 svg {
+    margin-right: 1.5vw;
+  }
+  .profileInfoAddress p {
+    font-size: 1.5vw;
+    font-weight: 300;
+    margin-left: 3.5vw;
+    color: #6b7280;
+  } */

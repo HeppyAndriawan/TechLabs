@@ -1,0 +1,14 @@
+.myAccountContainer {
+    width: 100%;
+    min-height: 100dvh;
+    padding-top: 10dvh;
+  }
+  .myAccountProfile {
+    width: 100%;
+    height: fit-content;
+  }
+  .myAccountPost {
+    width: 100%;
+    height: fit-content;
+  }
+  

@@ -1,0 +1,142 @@
+.profileContainer {
+  width: 100%;
+  min-height: 40dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #eef0f3;
+  padding: 5vw;
+  border-radius: 10px;
+}
+.profileImageContainer {
+  width: 60vw;
+  height: 80vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.profileImageDotContainer {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: flex-start;
+}
+.profileImageDotContainer img {
+  width: 10vw;
+  height: 10vw;
+}
+.profileImageCircleContainer {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: flex-end;
+}
+.profileImageCircleContainer img {
+  width: 10vw;
+  height: 10vw;
+}
+.profileImageProfileContainer {
+  width: 60vw;
+  height: 80vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.profileImageProfile {
+  width: 50vw;
+  height: 70vw;
+  display: flex;
+  align-items: center;
+  box-shadow: -1px 2px 15px -1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.profileImageProfileContainer img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.profileImageProfileContainer .profileImageEmpty {
+  width: 50vw;
+  height: 70vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f7fb;
+  border-radius: 5px;
+}
+.profileImageProfileContainer .profileImageEmpty svg {
+  width: 12vw;
+  height: 12vw;
+  color: #6b7280;
+}
+.profileInfoContainer {
+  max-width: 100%;
+  min-height: 35dvh;
+  margin-top: 5vw;
+}
+.profileInfoDetailContainer {
+  width: 100%;
+  height: fit-content;
+}
+.profileInfoDetailContainer h1 {
+  font-size: 5vw;
+  font-weight: 500;
+}
+.profileInfoDetailContainer h5 {
+  font-size: 3.6vw;
+  font-weight: 300;
+}
+.profileInfoDetailContainer p {
+  font-size: 3.6vw;
+  font-weight: 300;
+  margin-top: 2vw;
+  color: #6b7280;
+  font-style: italic;
+}
+.profileInfoAddressContainer {
+  margin-top: 10vw;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+.profileInfoAddress {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 5vw;
+}
+
+.profileInfoAddressIcon {
+  width: fit-content;
+  height: fit-content;
+}
+.profileInfoAddressIcon svg {
+  margin-top: 2.5px;
+}
+.profileInfoAddressInfo {
+  width: fit-content;
+  height: fit-content;
+  margin-left: 5vw;
+}
+.profileInfoAddressInfo h1 {
+  font-size: 3.5vw;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.profileInfoAddressInfo p {
+  font-size: 3.5vw;
+  font-weight: 300;
+  color: #6b7280;
+}

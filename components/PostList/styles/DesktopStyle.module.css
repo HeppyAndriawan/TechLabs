@@ -1,0 +1,31 @@
+.postListContainer {
+  width: 100%;
+  height: fit-content;
+}
+.postListHeader {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2vw;
+}
+.postListHeader h1 {
+  font-size: 1.3vw;
+  font-weight: 500;
+}
+.postListHeaderButton {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.postListHeaderButton span {
+  font-size: 1vw;
+  font-weight: 300;
+  color: #6b7280;
+  margin-right: 2vw;
+}

@@ -1,0 +1,146 @@
+.profileContainer {
+  width: 100%;
+  min-height: 50dvh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #eef0f3;
+  padding: 4vw 5vw;
+  border-radius: 10px;
+}
+.profileImageContainer {
+  width: 13vw;
+  height: 17vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.profileImageDotContainer {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: flex-start;
+}
+.profileImageDotContainer img {
+  width: 2.5vw;
+  height: 2.5vw;
+}
+.profileImageCircleContainer {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: flex-end;
+}
+.profileImageCircleContainer img {
+  width: 2vw;
+  height: 2vw;
+}
+.profileImageProfileContainer {
+  width: 13vw;
+  height: 17vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.profileImageProfile {
+  width: 11vw;
+  height: 15vw;
+  display: flex;
+  align-items: center;
+  box-shadow: -1px 2px 15px -1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.profileImageProfileContainer img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.profileImageProfileContainer .profileImageEmpty {
+  width: 11vw;
+  height: 15vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f7fb;
+  border-radius: 5px;
+}
+.profileImageProfileContainer .profileImageEmpty svg {
+  width: 3vw;
+  height: 3vw;
+  color: #6b7280;
+}
+
+.profileInfoContainer {
+  max-width: 70%;
+  min-height: 50dvh;
+  margin-left: 2vw;
+  margin-top: 1.5vw;
+}
+.profileInfoDetailContainer {
+  width: 100%;
+  height: fit-content;
+}
+.profileInfoDetailContainer h1 {
+  font-size: 1.3vw;
+  font-weight: 500;
+}
+.profileInfoDetailContainer h5 {
+  font-size: 1vw;
+  font-weight: 300;
+}
+.profileInfoDetailContainer p {
+  font-size: 1vw;
+  font-weight: 300;
+  margin-top: 1.5vw;
+  color: #6b7280;
+  font-style: italic;
+}
+.profileInfoAddressContainer {
+  margin-top: 5vw;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+}
+.profileInfoAddress {
+  width: 20vw;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-right: 3vw;
+}
+.profileInfoAddress:last-child {
+  margin-right: 0;
+}
+.profileInfoAddressIcon {
+  width: fit-content;
+  height: fit-content;
+}
+.profileInfoAddressIcon svg {
+  margin-top: 2.5px;
+}
+.profileInfoAddressInfo {
+  width: fit-content;
+  height: fit-content;
+  margin-left: 1vw;
+}
+.profileInfoAddressInfo h1 {
+  font-size: 1vw;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.profileInfoAddressInfo p {
+  font-size: 1vw;
+  font-weight: 300;
+  color: #6b7280;
+}

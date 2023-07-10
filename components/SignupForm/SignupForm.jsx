@@ -1,7 +1,10 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAppContext } from "@/tool/StateProvider/StateProvider";
 import WidthBTN from "@/components/WidthBTN/WidthBTN";
 import MediaQuery from "@/tool/MediaQuery/MediaQuery";
+import $ from "jquery";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,12 +15,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
+import axios from "axios";
 import desktop from "./styles/DesktopStyles.module.css";
 import tablet from "./styles/TabletStyles.module.css";
 import mobile from "./styles/MobileStyles.module.css";
 
 export default function SignupForm() {
+  const router = useRouter();
+  const context = useAppContext();
   const { styles } = MediaQuery(desktop, tablet, mobile, tablet);
 
   // Reach Hook Form
@@ -32,9 +37,106 @@ export default function SignupForm() {
   // If Submit Buttom Active
   const [isRegisterButtonActive, setIsRegisterButtonActive] = useState(false);
 
+  // Select Hendeler
+  const selectHendeler = (e) => {
+    setValue("user_account_type", e);
+  };
+
   // Save new account
   const saveNewAccount = async (dataForm) => {
-    console.log(dataForm);
+    $("html,body").animate({ scrollTop: 0 });
+    setIsRegisterButtonActive(true);
+
+    // Check Password Confirm
+    if (dataForm.user_password !== dataForm.user_confirm_password) {
+      setIsRegisterButtonActive(false);
+      context.sendWarning(
+        "alert",
+        "Denied",
+        `Password confirmation is not match. Please ry again.`
+      );
+      reset(
+        { user_confirm_password: "" },
+        {
+          keepErrors: true,
+          keepDirty: true,
+          keepIsSubmitted: false,
+          keepTouched: false,
+          keepIsValid: false,
+          keepSubmitCount: false,
+        }
+      );
+      return;
+    }
+
+    // execute data to server
+    new Promise((resolve) => {
+      // Hashing Password
+      const passwordHash = require("password-hash");
+      const hashedPassword = passwordHash.generate(dataForm.user_password);
+
+      const construct = {
+        account_type: dataForm.user_account_type,
+        name: dataForm.user_name,
+        email: dataForm.user_email,
+        password: hashedPassword,
+        key: process.env.NEXT_PUBLIC_API_KEY,
+      };
+
+      resolve(construct);
+    }).then(async (resolve) => {
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      await axios
+        .post(`/api/users`, resolve, {
+          headers: headers,
+        })
+        .then(function (response) {
+          // If Error Send Warning
+          response.data.error &&
+            context.sendWarning(
+              "alert",
+              "Error",
+              "Error has been accrued, please reload the page and try again"
+            );
+
+          // If Success redirect to login page
+          if (!response.data.error) {
+            setIsRegisterButtonActive(false);
+            context.sendWarning(
+              "default",
+              "Success",
+              "Register is completed. Now you can login with your email and password."
+            );
+
+            reset(
+              {
+                user_account_type: "",
+                user_name: "",
+                user_email: "",
+                user_password: "",
+                user_confirm_password: "",
+              },
+              {
+                keepErrors: true,
+                keepDirty: true,
+                keepIsSubmitted: false,
+                keepTouched: false,
+                keepIsValid: false,
+                keepSubmitCount: false,
+              }
+            );
+            setTimeout(() => {
+              router.push("/login");
+            }, 1000);
+          }
+        })
+        .catch(async function (error) {
+          context.sendWarning("alert", "Error", error.message);
+        });
+    });
   };
 
   return (
@@ -117,9 +219,33 @@ export default function SignupForm() {
               })}
             />
           </div>
+          <div className={styles.RegisterMainRightFormInputList}>
+            <Label className={styles.inputLable}>
+              Confirm Password *{" "}
+              {errors.user_confirm_password && (
+                <span className={styles.inputError}>
+                  ( This field is required )
+                </span>
+              )}
+            </Label>
+            <Input
+              type="password"
+              inputMode="text"
+              placeholder="confirm"
+              {...register("user_confirm_password", {
+                required: true,
+              })}
+            />
+          </div>
         </div>
         <div className={styles.RegisterMainRightFormInputContainer}>
-          <WidthBTN type="submit" name="Submit" />
+          <WidthBTN
+            type="submit"
+            name={isRegisterButtonActive === false ? "Sign Up" : "Loading..."}
+          />
+        </div>
+        <div className={styles.RegisterMainRightFormInputContainer}>
+         <h1>Already have an account ? <button type="button" onClick={()=> router.push("/login")}>Sign In</button></h1>
         </div>
       </form>
     )

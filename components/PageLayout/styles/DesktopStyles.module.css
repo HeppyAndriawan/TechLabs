@@ -1,0 +1,8 @@
+.pageContainer {
+  width: 100%;
+  min-height: 100dvh;
+  padding: 0 5%;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 5vw;
+}
