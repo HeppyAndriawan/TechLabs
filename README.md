@@ -25,3 +25,6 @@ https://github.com/HeppyAndriawan/Media_Query/blob/main/media_query.css
 
 
 11. Now you can try by run this command in the terminal "npm run dev" and go to your browser and visit http://localhost:3000/signup to if the connection is working
+
+
+
