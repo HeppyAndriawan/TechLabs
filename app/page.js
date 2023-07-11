@@ -5,9 +5,5 @@ export default function Home() {
   const { data: session, status } = useSession();
   // console.log(session)
 
-  return (
-    <>
-    {/*  Please place your component after this lines below */}
-    </>
-  );
+  return <>{/*  Please place your component after this lines below */}</>;
 }
