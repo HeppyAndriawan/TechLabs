@@ -52,10 +52,6 @@ export default function ProfileInformation() {
   // Fetch Data user
   const { data, isLoading } = useSWR("USER_LIST", getUserProfile);
 
-  // useEffect(() => {
-  //   data !== undefined && signOut({ callbackUrl: '/login' })
-  // }, [data]);
-
   return (
     styles !== null &&
     data !== undefined && (
