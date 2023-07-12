@@ -51,6 +51,7 @@ export default function ProfileInformation() {
 
   // Fetch Data user
   const { data, isLoading } = useSWR("USER_LIST", getUserProfile);
+  console.log(data)
 
   return (
     styles !== null &&
