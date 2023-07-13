@@ -3,7 +3,9 @@ import React, { useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
 import useSWR from "swr";
 import axios from "axios";
+import { TabMenu } from "@/components/TabMenu/TabMenu";
 import EditProfile from "@/components/EditProfile/EditProfile";
+import EditLogin from "@/components/EditLogin/EditLogin";
 import MediaQuery from "@/tool/MediaQuery/MediaQuery";
 import { desktop, tablet, mobile } from "./styles/styles";
 
@@ -45,7 +47,19 @@ export default function Setting() {
   };
 
   // Fetch Data user
-  const { data, isLoading } = useSWR("USER_LIST", getUserProfile);
+  const { isLoading } = useSWR("USER_LIST", getUserProfile);
+
+  // Data Menu Tab
+  const menuTabInfo = [
+    {
+      title: "Profile",
+      component: <EditProfile />,
+    },
+    {
+      title: "Login",
+      component: <EditLogin />,
+    },
+  ];
 
   return (
     styles !== null && (
@@ -57,10 +71,8 @@ export default function Setting() {
           </p>
         </div>
         <div className={styles.setting.form.container}>
-          <h5 className={styles.setting.form.h5}>* Profile Information</h5>
-          <EditProfile />
+          <TabMenu default="Profile" data={menuTabInfo} />
         </div>
-        <div></div>
       </div>
     )
   );

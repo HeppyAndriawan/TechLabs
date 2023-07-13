@@ -24,4 +24,3 @@ export default function MyAccount() {
   );
 }
 
-// Create My Account Page

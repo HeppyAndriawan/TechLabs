@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function ShortBTN(props) {
   return (
-    <Button {...props}>
+    <Button className="mr-[10px] last:mr-[0]" {...props}>
       {props.name}
     </Button>
   );

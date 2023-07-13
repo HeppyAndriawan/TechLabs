@@ -70,7 +70,7 @@ export async function PATCH(request, res) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
   const regData = await request.json();
-  const {account_type, address, description, email, image, name, password} = regData();
+  const {account_type, address, description, email, image, name, password} = regData;
 
   // Execute API
   try {

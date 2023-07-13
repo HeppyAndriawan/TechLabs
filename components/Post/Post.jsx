@@ -61,3 +61,6 @@ export default function Post() {
     </div>
   );
 }
+
+
+//  Create responsive design wih media query component

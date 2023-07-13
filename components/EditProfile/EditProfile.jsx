@@ -1,7 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
+import { useRouter } from "next/navigation";
 import { useAppContext } from "@/tool/StateProvider/StateProvider";
 import $ from "jquery";
+import axios from "axios";
 import { useSWRConfig } from "swr";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
@@ -17,11 +19,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { CameraIcon } from "@radix-ui/react-icons";
-import MediaQuery from "@/tool/MediaQuery/MediaQuery";
+import { SwitchTo } from "@/tool/Switch/Switch";
 import ShortBTN from "../ShortBTN/ShortBTN";
+import MediaQuery from "@/tool/MediaQuery/MediaQuery";
 import { desktop, tablet, mobile } from "./styles/styles";
 
 export default function EditProfile(props) {
+  const router = useRouter();
   const context = useAppContext();
   const { styles } = MediaQuery(desktop, tablet, mobile, tablet);
 
@@ -83,9 +87,11 @@ export default function EditProfile(props) {
   // Set Data Value to the input
   useEffect(() => {
     if (dataUser !== undefined) {
-      dataUser[0].image !== null
-        ? setProfileImage(dataUser[0].image)
-        : setProfileImage("/images/55x55.png");
+      if (dataUser[0].image !== null) {
+        setProfileImage(dataUser[0].image);
+      } else {
+        setProfileImage("/images/55x55.png");
+      }
 
       setValue("user_account_type", dataUser[0].account_type);
       setValue("user_name", dataUser[0].name);
@@ -96,10 +102,13 @@ export default function EditProfile(props) {
       );
       setValue(
         "user_information",
-        dataUser[0].address === null ? "" : dataUser[0].address
+        dataUser[0].description === null ? "" : dataUser[0].description
       );
     }
   }, [dataUser]);
+
+  // If Submit Buttom Active
+  const [isProfileEdit, setIsProfileEdit] = useState(false);
 
   // If Submit Buttom Active
   const [isRegisterButtonActive, setIsRegisterButtonActive] = useState(false);
@@ -114,8 +123,6 @@ export default function EditProfile(props) {
     setIsRegisterButtonActive(true);
 
     new Promise((resolve) => {
-      console.log(dataUser[0]);
-
       const newDataUser = {
         ...dataUser[0],
         account_type: dataForm.user_account_type,
@@ -123,58 +130,60 @@ export default function EditProfile(props) {
         email: dataForm.user_email,
         description: dataForm.user_information,
         address: dataForm.user_address,
-        image: JSON.stringify(profileImage),
+        image: profileImage,
       };
 
       resolve(newDataUser);
     }).then(async (response) => {
+      const headers = {
+        "Content-Type": "application/json",
+      };
 
-      // PLEASE FINISH THIS UPDATE DATA PROFILE 
-      
-      // await axios
-      //   .patch(`/api/users?id=${response.id}`, response, {
-      //     headers: headers,
-      //   })
-      //   .then(function (response) {
-      //     response.data.error &&
-      //       context.sendWarning(
-      //         "alert",
-      //         "Error",
-      //         "An error has been accrued, the process has been canceled. Reload and try again."
-      //       );
-      //     if(!response.data.error){
-      //       context.sendWarning(
-      //         "default",
-      //         "Success",
-      //         "Profile has been updated successfully. "
-      //       );
-      //       setIsRegisterButtonActive(false);
-      //       setTimeout(() => {
-      //         reset(
-      //           {
-      //             PALLET_NAME: "",
-      //             PALLET_MEASURE_L: "",
-      //             PALLET_MEASURE_W: "",
-      //             PALLET_MEASURE_H: "",
-      //           },
-      //           {
-      //             keepErrors: true,
-      //             keepDirty: true,
-      //             keepIsSubmitted: false,
-      //             keepTouched: false,
-      //             keepIsValid: false,
-      //             keepSubmitCount: false,
-      //           }
-      //         );
-              
-      //       }, 1000);
-      //     }
-          
-           
-      //   })
-      //   .catch(async function (error) {
-      //     context.sendWarning("alert", "Error", error.message);
-      //   });
+      await axios
+        .patch(`/api/users?id=${response.id}`, response, {
+          headers: headers,
+        })
+        .then(function (response) {
+          response.data.error &&
+            context.sendWarning(
+              "alert",
+              "Error",
+              "An error has been accrued, the process has been canceled. Reload and try again."
+            );
+          if (!response.data.error) {
+            context.sendWarning(
+              "default",
+              "Success",
+              "Profile has been updated successfully. "
+            );
+            setIsRegisterButtonActive(false);
+            setIsProfileEdit(false);
+            reset(
+              {
+                user_account_type: "",
+                user_address: "",
+                user_email: "",
+                user_information: "",
+                user_name: "",
+                user_image: [],
+              },
+              {
+                keepErrors: true,
+                keepDirty: true,
+                keepIsSubmitted: false,
+                keepTouched: false,
+                keepIsValid: false,
+                keepSubmitCount: false,
+              }
+            );
+            setTimeout(() => {
+              router.push("/my_account");
+            }, 1000);
+          }
+        })
+        .catch(async function (error) {
+          context.sendWarning("alert", "Error", error.message);
+        });
     });
   };
 
@@ -183,7 +192,9 @@ export default function EditProfile(props) {
       <div className={styles.editProfile.container}>
         <div className={styles.editProfile.header.container}>
           <h1 className={styles.editProfile.header.h1}>Account Information</h1>
-          <p className={styles.editProfile.header.p}>Edit your profile here</p>
+          <p className={styles.editProfile.header.p}>
+            Edit your profile detail here
+          </p>
         </div>
         <form
           className={styles.editProfile.form.container}
@@ -193,14 +204,18 @@ export default function EditProfile(props) {
             <div className={styles.editProfile.form.input.list}>
               <div className={styles.editProfile.form.input.img.container}>
                 <div className={styles.editProfile.form.input.wrap}>
-                  <Image
-                    src={profileImage}
-                    width={55}
-                    height={55}
-                    alt="Profile picture"
-                    className={styles.editProfile.form.input.img.img}
-                    onClick={sellectImage}
-                  />
+                  <Suspense>
+                    <SwitchTo condition={profileImage !== ""}>
+                      <Image
+                        src={profileImage}
+                        width={55}
+                        height={55}
+                        alt="Profile picture"
+                        className={styles.editProfile.form.input.img.img}
+                        onClick={sellectImage}
+                      />
+                    </SwitchTo>
+                  </Suspense>
                 </div>
                 <div className={styles.editProfile.form.input.img.icon}>
                   <CameraIcon />
@@ -210,6 +225,7 @@ export default function EditProfile(props) {
                 type="file"
                 id="myfile"
                 className="hidden"
+                disabled={isProfileEdit === false}
                 {...register("user_image")}
               />
             </div>
@@ -227,6 +243,7 @@ export default function EditProfile(props) {
               <Select
                 defaultValue={watch("user_account_type")}
                 onValueChange={(e) => selectHendeler(e)}
+                disabled={isProfileEdit === false}
                 required
               >
                 <SelectTrigger>
@@ -251,6 +268,7 @@ export default function EditProfile(props) {
                 type="text"
                 inputMode="text"
                 placeholder="full name"
+                disabled={isProfileEdit === false}
                 {...register("user_name", {
                   required: true,
                 })}
@@ -271,6 +289,7 @@ export default function EditProfile(props) {
                 type="text"
                 inputMode="email"
                 placeholder="email"
+                disabled={isProfileEdit === false}
                 {...register("user_email", {
                   required: true,
                 })}
@@ -282,6 +301,7 @@ export default function EditProfile(props) {
                 type="text"
                 inputMode="text"
                 placeholder="address"
+                disabled={isProfileEdit === false}
                 {...register("user_address")}
               />
             </div>
@@ -293,15 +313,30 @@ export default function EditProfile(props) {
                 type="text"
                 inputMode="text"
                 placeholder="information"
+                disabled={isProfileEdit === false}
                 {...register("user_information")}
               />
             </div>
           </div>
           <div className={styles.editProfile.form.input.container}>
-            <ShortBTN
-              type="submit"
-              name={isRegisterButtonActive === false ? "Submit" : "Loding..."}
-            />
+            <SwitchTo condition={isProfileEdit === false}>
+              <ShortBTN
+                type="button"
+                name="Edit Profile"
+                onClick={() => setIsProfileEdit(true)}
+              />
+            </SwitchTo>
+            <SwitchTo condition={isProfileEdit === true}>
+              <ShortBTN
+                type="submit"
+                name={isRegisterButtonActive === false ? "Submit" : "Loding..."}
+              />
+              <ShortBTN
+                type="button"
+                name="Cancel"
+                onClick={() => setIsProfileEdit(false)}
+              />
+            </SwitchTo>
           </div>
         </form>
       </div>
