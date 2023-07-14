@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import MediaQuery from "@/tool/MediaQuery/MediaQuery";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import axios from "axios";
 import useSWR from "swr";
 import Image from "next/image";
@@ -48,7 +48,7 @@ export default function ProfileInformation() {
       return userdata;
     });
   };
-
+  
   // Fetch Data user
   const { data, isLoading } = useSWR("USER_LIST", getUserProfile);
 
@@ -75,7 +75,7 @@ export default function ProfileInformation() {
           </div>
           <div className={styles.profileImageProfileContainer}>
             <div className={styles.profileImageProfile}>
-              <SwitchTo condition={data[0].image !== null}>
+              <SwitchTo condition={data[0]?.image !== null}>
                 <Image
                   src="/imgExample/profile.jpg"
                   width={100}
@@ -83,7 +83,7 @@ export default function ProfileInformation() {
                   alt="Picture of the author"
                 />
               </SwitchTo>
-              <SwitchTo condition={data[0].image === null}>
+              <SwitchTo condition={data[0]?.image === null}>
                 <div className={styles.profileImageEmpty}>
                   <ImageIcon />
                 </div>
@@ -93,12 +93,12 @@ export default function ProfileInformation() {
         </div>
         <div className={styles.profileInfoContainer}>
           <div className={styles.profileInfoDetailContainer}>
-            <h1>{Capitalize("all", data[0].name)}</h1>
-            <h5>{Capitalize("single", data[0].account_type)}</h5>
+            <h1>{Capitalize("all", data[0]?.name)}</h1>
+            <h5>{Capitalize("single", data[0]?.account_type)}</h5>
             <p>
-              {data[0].description === null
+              {data[0]?.description === null
                 ? "No Description"
-                : data[0].description}
+                : data[0]?.description}
             </p>
           </div>
           <div className={styles.profileInfoAddressContainer}>
@@ -123,7 +123,7 @@ export default function ProfileInformation() {
               </div>
               <div className={styles.profileInfoAddressInfo}>
                 <h1>Address</h1>
-                <p>{data[0].address === null ? "-" : data[0].address}</p>
+                <p>{data[0]?.address === null ? "-" : data[0]?.address}</p>
               </div>
             </div>
             <div className={styles.profileInfoAddress}>
@@ -143,7 +143,7 @@ export default function ProfileInformation() {
               </div>
               <div className={styles.profileInfoAddressInfo}>
                 <h1>Email</h1>
-                <p>{data[0].email === null ? "-" : data[0].email}</p>
+                <p>{data[0]?.email === null ? "-" : data[0]?.email}</p>
               </div>
             </div>
           </div>

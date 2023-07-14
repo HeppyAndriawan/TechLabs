@@ -32,4 +32,11 @@
   .postListHeaderButton span {
     display: none;
   }
-  
+  .postList {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }

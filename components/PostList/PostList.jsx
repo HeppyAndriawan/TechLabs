@@ -33,7 +33,14 @@ export default function PostList(props) {
             </Menubar>
           </div>
         </div>
-        <div>
+        <div className={styles.postList}>
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
           <Post />
         </div>
       </div>

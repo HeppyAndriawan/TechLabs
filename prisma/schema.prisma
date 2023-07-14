@@ -17,11 +17,12 @@ model User {
 
   account_type String
   name         String
-  email        String  @unique
+  email        String   @unique
   password     String
   description  String?
   address      String?
   image        String?
+  follow       String[]
   post         Post[]
 }
 
