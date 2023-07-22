@@ -40,7 +40,8 @@ export default function LoginForm() {
   const [isRegisterButtonActive, setIsRegisterButtonActive] = useState(false);
 
   // Save new account
-  const saveNewAccount = async (dataForm) => {
+  const loginHendeler = async (dataForm) => {
+    
     $("html,body").animate({ scrollTop: 0 });
     setIsRegisterButtonActive(true);
 
@@ -49,7 +50,6 @@ export default function LoginForm() {
       password: dataForm.user_password,
       redirect: false,
     }).then(({ ok, error }) => {
-      console.log(error);
       ok && router.push("/login");
       if (error) {
         context.sendWarning(
@@ -82,7 +82,7 @@ export default function LoginForm() {
     styles !== null && (
       <form
         className={styles.RegisterMainRightFormInput}
-        onSubmit={handleSubmit(saveNewAccount)}
+        onSubmit={handleSubmit(loginHendeler)}
       >
         <div className={styles.RegisterMainRightFormInputContainer}>
           <div className={styles.RegisterMainRightFormInputList}>

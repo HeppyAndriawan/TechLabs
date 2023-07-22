@@ -29,3 +29,12 @@
   color: #6b7280;
   margin-right: 2vw;
 }
+.postList {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+}

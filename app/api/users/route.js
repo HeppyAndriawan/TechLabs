@@ -66,8 +66,33 @@ export async function POST(request) {
 }
 
 export async function PATCH(request, res) {
+  const session = await getServerSession(authOptions);
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
+  const regData = await request.json();
+  const {account_type, address, description, email, image, name, password} = regData;
+
   // Execute API
   try {
+    if (session !== null) {
+      const response = await prisma.user.update({
+        where: {
+          id: id,
+        },
+        data: {
+          account_type: account_type,
+          address: address,
+          description: description,
+          email: email,
+          image: image,
+          name: name,
+          password: password,
+        },
+      });
+
+      return NextResponse.json({ response });
+    }
+
     return NextResponse.json({ status: "Can not find the page." });
   } catch (error) {
     return NextResponse.json({ error: error.message, response: [] });

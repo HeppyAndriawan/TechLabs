@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { SessionProvider } from "next-auth/react";
-import { SWRConfig } from "swr";
+import { SWRConfig } from 'swr'
 import { AppWrapper } from "@/tool/StateProvider/StateProvider";
 import BaseLayout from "@/componentPages/BaseLayout/BaseLayout";
 import { ErrorBoundary } from "react-error-boundary";

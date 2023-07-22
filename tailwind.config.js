@@ -5,7 +5,8 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
- 
+    "./componentPages/**/*.{js,ts,jsx,tsx,mdx}",
+
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
@@ -74,5 +75,25 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-}
+  plugins: [
+    require("tailwindcss-animate"),
+    function ({ matchVariant, theme }) {
+      matchVariant(
+        "nth",
+        (value) => {
+          return `&:nth-child(${value})`;
+        },
+        {
+          values: {
+            DEFAULT: "n", // Default value for `nth:`
+            "2n": "2n", // `nth-2n:utility` will generate `:nth-child(2n)` CSS selector
+            "3n": "3n",
+            "4n": "4n",
+            "5n": "5n",
+            //... so on if you need
+          },
+        }
+      );
+    },
+  ],
+};
