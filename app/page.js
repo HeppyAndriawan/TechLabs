@@ -1,14 +1,16 @@
 "use client";
 import { useSession } from "next-auth/react";
+import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/Footer/Footer";
+
 
 export default function Home() {
   const { data: session, status } = useSession();
-  // console.log(session)
-
-  return <>{/*  Please place your component after this lines below */}
+  return (
+    <>
+    <NavBar/>
     <Footer/>
-    {/* When navbar and hero Section is there, i have to put a class with "sticky bottom" or so to the footer, so that it is at the end of the page */}
-    
-  </>;
+    </>
+  )
+  
 }
