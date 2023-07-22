@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import Contact from "@/app/contact/page";
-import Impressum from "@/app/impressum/page";
+// import Contact from "@/app/contact/page";
+// import Impressum from "@/app/impressum/page";
+
 
 export default function Footer () {
     return (
@@ -43,3 +44,4 @@ export default function Footer () {
         </section>
     );
   }
+
