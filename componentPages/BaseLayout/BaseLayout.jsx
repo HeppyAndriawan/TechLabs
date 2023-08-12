@@ -15,7 +15,6 @@ export default function BaseLayout(props) {
     <div className="layoutContainer" {...props}>
       <WarningMessage />
       <div className="min-h-[100dvh]">{props.children}</div>
-      <Footer />
     </div>
   );
 }
