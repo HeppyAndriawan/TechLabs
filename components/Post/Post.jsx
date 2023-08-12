@@ -4,9 +4,9 @@ import Carousel from "../Carousel/Carousel";
 import MediaQuery from "@/tool/MediaQuery/MediaQuery";
 import { desktop, tablet, mobile } from "./styles/styles";
 
-export default function Post() {
+ 
+export default function Post(props) {
   const { styles } = MediaQuery(desktop, tablet, mobile, tablet);
-  
   
   return (
     styles !== null && (
@@ -16,14 +16,14 @@ export default function Post() {
             <div className={styles.postUserProfile.container}>
               <Image
                 className={styles.postUserProfile.image}
-                src="/images/55x55.png"
+                src={props.image}
                 width={55}
                 height={55}
                 alt="Picture Profile"
               />
               <div className={styles.postUserProfile.info.container}>
                 <h1 className={styles.postUserProfile.info.h1}>
-                  Anika Coleman
+                {props.name}
                 </h1>
                 <p className={styles.postUserProfile.info.p}>Influencer</p>
               </div>

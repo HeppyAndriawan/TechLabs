@@ -2,7 +2,6 @@
 import React, {useEffect} from "react";
 import $ from "jquery";
 import WarningMessage from "@/components/WarningMessage/WarningMessage";
-import Footer from "@/components/Footer/Footer";
 import "./styles/styles.moodule.css";
 
 export default function BaseLayout(props) {
