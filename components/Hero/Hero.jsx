@@ -1,8 +1,7 @@
 import React from 'react'
 
 export default function Hero() {
-  return (
-    
+  return (    
     <div className="relative h-screen bg-cover bg-center bg-[url('/images/hero_720.jpg')]">
       <div className="flex flex-col items-center justify-center h-full">
         <h1 className="text-white text-4xl font-bold mb-4">Big things starts from small ideas.</h1>
@@ -19,4 +18,4 @@ export default function Hero() {
     </div>
   );
 };
-  
+ 

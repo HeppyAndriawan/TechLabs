@@ -1,6 +1,6 @@
 const desktop ={
-    container: "w-[21.5vw] min-h-[570px] mr-[1vw] nth-4n:mr-0 mb-[1vw] relative",
-    postContainer: "w-[21.5vw] min-h-[570px] p-[20px] bg-white rounded-[9px] border border-neutral-200",
+    container: "w-[21.75vw] min-h-[570px] mr-[1vw] nth-4n:mr-0 mb-[1vw] relative",
+    postContainer: "w-[21.75vw] min-h-[570px] p-[20px] bg-white rounded-[9px] border border-neutral-200",
     postHeader:"w-full h-fit flex flex-row justify-between items-end mb-[20px] ",
     postUserProfile: {
         container:"w-[100%] h-fit flex flex-row",
