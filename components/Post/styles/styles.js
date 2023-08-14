@@ -13,6 +13,10 @@ const desktop ={
             container:"w-[76px] h-9 px-2 py-1 rounded--md shadow border border-black justify-center items-center gap-1.5 inline-flex",
             button:"text-black text-xs font-medium leading-tight cursor-pointer",
         },
+        imageProfile: {
+            constainer:"w-[55px] h-[55px] relative overflow-hidden",
+            image:"w-auto h-auto",
+        },
         image:{
             container: "w-full h-fit",
         }
@@ -25,7 +29,7 @@ const desktop ={
     },
     postButton:{
         container:"w-full flex flex-row place-content-around mt-[20px]",
-        buttonWrap:"w-[50%] flex flex-row justify-center justify-items-center items-center",
+        buttonWrap:"w-fit flex flex-row justify-center justify-items-center items-center",
         button:"cursor-pointer Like ml-[5px] text-gray-500 text-[12px] font-normal leading-tight",
     }
 },
@@ -44,6 +48,10 @@ tablet={
             container:"w-[76px] h-9 px-2 py-1 rounded--md shadow border border-black justify-center items-center gap-1.5 inline-flex",
             button:"text-black text-xs font-medium leading-tight cursor-pointer",
         },
+        imageProfile: {
+            constainer:"w-[55px] h-[55px] relative overflow-hidden",
+            image:"w-auto h-auto",
+        },
         image:{
             container: "w-full h-fit",
         }
@@ -56,7 +64,7 @@ tablet={
     },
     postButton:{
         container:"w-full flex flex-row place-content-around mt-[20px]",
-        buttonWrap:"w-[50%] flex flex-row justify-center justify-items-center items-center",
+        buttonWrap:"w-fit  flex flex-row justify-center justify-items-center items-center",
         button:"cursor-pointer Like ml-[5px] text-gray-500 text-[13px] font-normal leading-tight",
     }
 },
@@ -75,6 +83,10 @@ mobile={
             container:"w-[76px] h-9 px-2 py-1 rounded--md shadow border border-black justify-center items-center gap-1.5 inline-flex",
             button:"text-black text-xs font-medium leading-tight cursor-pointer",
         },
+        imageProfile: {
+            constainer:"w-[55px] h-[55px] relative overflow-hidden",
+            image:"w-auto h-auto",
+        },
         image:{
             container: "w-full h-fit",
         }
@@ -87,7 +99,7 @@ mobile={
     },
     postButton:{
         container:"w-full flex flex-row place-content-around mt-[20px]",
-        buttonWrap:"w-[50%] flex flex-row justify-center items-center",
+        buttonWrap:"w-fit flex flex-row justify-center items-center",
         button:"cursor-pointer Like ml-[5px] text-gray-500 text-sm font-normal leading-tight",
     }
 }
