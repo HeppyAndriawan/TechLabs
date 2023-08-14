@@ -16,7 +16,6 @@ export default function BaseLayout(props) {
       <NavBar />
       <WarningMessage />
       <div className="min-h-[100dvh]">{props.children}</div>
-      <Footer />
     </div>
   );
 }
