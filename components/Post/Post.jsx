@@ -1,13 +1,17 @@
 import React from "react";
 import Image from "next/image";
 import Carousel from "../Carousel/Carousel";
+import Capitalize from "@/tool/Capitalize/Capitalize";
 import MediaQuery from "@/tool/MediaQuery/MediaQuery";
+import $ from 'jquery';
 import { desktop, tablet, mobile } from "./styles/styles";
 
  
 export default function Post(props) {
   const { styles } = MediaQuery(desktop, tablet, mobile, tablet);
-  
+  const postData =[
+    
+  ]
   return (
     styles !== null && (
       <div className={styles.container}>
@@ -16,16 +20,18 @@ export default function Post(props) {
             <div className={styles.postUserProfile.container}>
               <Image
                 className={styles.postUserProfile.image}
-                src={props.image}
+                src={props.data.user.image}
                 width={55}
                 height={55}
                 alt="Picture Profile"
               />
               <div className={styles.postUserProfile.info.container}>
                 <h1 className={styles.postUserProfile.info.h1}>
-                {props.name}
+                {props.data.user.name}
                 </h1>
-                <p className={styles.postUserProfile.info.p}>Influencer</p>
+                <p className={styles.postUserProfile.info.p}>
+                  {Capitalize("single", props.data.user.role)}
+                  </p>
               </div>
             </div>
             <div className={styles.postUserProfile.button.container}>
@@ -35,14 +41,13 @@ export default function Post(props) {
             </div>
           </div>
           <div className={styles.postUserProfile.image.container}>
-            <Carousel />
+            <Carousel data={props.data.images}/>
           </div>
           <div className={styles.postSaparator}></div>
           <div className={styles.postDescription.container}>
             <h1 className={styles.postDescription.h1}>About Person</h1>
             <p className={styles.postDescription.p}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Pellentesque posuere fermentum urna, eu condimentum mauris
+              {$`{props.data.description.substring(0, 150)}`}
             </p>
           </div>
           <div className={styles.postSaparator}></div>
