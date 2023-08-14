@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import MediaQuery from "@/tool/MediaQuery/MediaQuery";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import axios from "axios";
 import useSWR from "swr";
 import Image from "next/image";
