@@ -17,12 +17,13 @@ import { useGetPostData } from "../PostFormEdit/store/store";
 import DialogBox from "../DialogBox/DialogBox";
 import { useDialogEditPost } from "../DialogBox/store/store";
 import MediaQuery from "@/tool/MediaQuery/MediaQuery";
-import $ from 'jquery';
+import $ from "jquery";
 import { desktop, tablet, mobile } from "./styles/styles";
 
 export default function Post(props) {
   const { styles } = MediaQuery(desktop, tablet, mobile, tablet);
   const user = JSON.parse(props.data.user);
+  const image = user.image === null ? "" : `${JSON.parse(user.image)}`;
   const { cache, mutate, ...extraConfig } = useSWRConfig();
 
   // Delete Post
@@ -55,10 +56,10 @@ export default function Post(props) {
       });
   };
 
-   // Dialog Store
-   const dialog = useDialogEditPost((state) => state.isDialogOpen);
-   const updateDialog = useDialogEditPost((state) => state.updateDialog);
-   const resetDialog = useDialogEditPost((state) => state.resetDialog);
+  // Dialog Store
+  const dialog = useDialogEditPost((state) => state.isDialogOpen);
+  const updateDialog = useDialogEditPost((state) => state.updateDialog);
+  const resetDialog = useDialogEditPost((state) => state.resetDialog);
 
   // Post Data Store
   const updatePostData = useGetPostData((state) => state.updatePostData);
@@ -92,7 +93,7 @@ export default function Post(props) {
       },
     ],
   };
-  
+
   return (
     styles !== null && (
       <div className={styles.container}>
@@ -100,15 +101,17 @@ export default function Post(props) {
           <div className={styles.postHeader}>
             <div className={styles.postUserProfile.container}>
               <div className={styles.postUserProfile.imageProfile.constainer}>
-                <Suspense>
-                  <Image
-                    className={styles.postUserProfile.imageProfile.image}
-                    src={`${JSON.parse(user.image)}`}
-                    width={0}
-                    height={0}
-                    alt="Picture Profile"
-                  />
-                </Suspense>
+                {image === null && (
+                  <Suspense>
+                    <Image
+                      className={styles.postUserProfile.imageProfile.image}
+                      src={`${JSON.parse(user.image)}`}
+                      width={0}
+                      height={0}
+                      alt="Picture Profile"
+                    />
+                  </Suspense>
+                )}
               </div>
               <div className={styles.postUserProfile.info.container}>
                 <h1 className={styles.postUserProfile.info.h1}>{user.name}</h1>
@@ -124,7 +127,10 @@ export default function Post(props) {
             </div>
           </div>
           <div className={styles.postUserProfile.image.container}>
-            <Carousel button={props.button} data={JSON.parse(props.data.image)} />
+            <Carousel
+              button={props.button}
+              data={JSON.parse(props.data.image)}
+            />
           </div>
           <div className={styles.postSaparator}></div>
           <div className={styles.postDescription.container}>

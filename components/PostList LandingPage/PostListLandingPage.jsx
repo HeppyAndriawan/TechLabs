@@ -13,20 +13,16 @@ export default function PostList(props) {
   const { styles } = MediaQuery(desktop, tablet, mobile, tablet);
   const { data: session, status } = useSession();
 
-   // Fetch Function
-   const getUserProfile = async () => {
-    return new Promise((resolve) => {
-      // Key Session
-      const key = atob(session.user.key);
-      resolve(key);
-    }).then(async (response) => {
+  // Fetch Function
+  const getUserProfile = async () => {
+    return new Promise(async (resolve) => {
       // Execute Fetch
       const findBy = {
         headers: {
           "Content-Type": "application/json",
         },
         params: {
-          email: response,
+          key: process.env.NEXT_PUBLIC_API_KEY,
         },
       };
 
@@ -42,14 +38,15 @@ export default function PostList(props) {
           console.log(`It's an Error : ${error.message}`);
           return null;
         });
-
-      return userdata;
+      resolve(userdata);
+    }).then(async (response) => {
+      return response;
     });
   };
 
   // Fetch Data user
   const { data, isLoading } = useSWR("USER_POST", getUserProfile);
-
+  console.log(data);
   return (
     styles !== null && (
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -72,7 +69,7 @@ export default function PostList(props) {
           </div>
         </div>
         <div className="w-full flex flex-row flex-wrap justify-between">
-          <SwitchTo condition={data !== undefined && data.length === 0}>
+          <SwitchTo condition={data !== undefined && data?.length === 0}>
             <div className={styles.postListEmptyContainer}>
               <div className={styles.postListEmpty}>
                 <h1>There is no list of post provided</h1>
@@ -80,24 +77,26 @@ export default function PostList(props) {
             </div>
           </SwitchTo>
 
-          <SwitchTo condition={data !== undefined && data.length >= 1}>
+          <SwitchTo condition={data !== undefined && data?.length >= 1}>
             {data !== undefined &&
+              data !== null &&
               data.map((info, index) => (
                 <Post key={index} data={info} button={false} edit />
               ))}
           </SwitchTo>
         </div>
-
       </div>
     )
   );
 }
 
-{/* 
+{
+  /* 
 margin bottom mb-5
 padding bottom pb-5
 space-y-5 -> geht alles nicht
 wie kann ich Abstand nach unten machen?
 
 mr-[1vw] in styles Post, daher Abstand rechts 1, kann ich nicht auf 0 setzen
-*/}
+*/
+}

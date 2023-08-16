@@ -102,7 +102,7 @@ export default function PostList(props) {
           </div>
         </div>
         <div className={styles.postList}>
-          <SwitchTo condition={data !== undefined && data.length === 0}>
+          <SwitchTo condition={data !== undefined && data?.length === 0}>
             <div className={styles.postListEmptyContainer}>
               <div className={styles.postListEmpty}>
                 <h1>There is no list of post provided</h1>
@@ -111,8 +111,8 @@ export default function PostList(props) {
           </SwitchTo>
 
           {/* Henriette ----------------------------------------------- */}
-          <SwitchTo condition={data !== undefined && data.length >= 1}>
-            {data !== undefined &&
+          <SwitchTo condition={data !== undefined && data?.length >= 1}>
+            {data !== undefined && data !== null &&
               data.map((info, index) => (
                 <Post key={index} data={info} button={false} edit />
               ))}

@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next";
 import { SortDSC } from "@/tool/SortASC/SortASC";
+import { Key } from "lucide-react";
 
 const prisma = new PrismaClient();
 
@@ -10,6 +11,8 @@ export async function GET(request, res) {
   const session = await getServerSession(authOptions);
   const { searchParams } = new URL(request.url);
   const email = searchParams.get("email");
+  const key = searchParams.get("key");
+  console.log(searchParams);
 
   try {
     if (session) {
@@ -57,6 +60,22 @@ export async function GET(request, res) {
             },
           });
         }
+      }
+    } else if (key === `${process.env.NEXT_PUBLIC_API_KEY}`) {
+      const getPost = await prisma.post.findMany();
+      const sortData = await SortDSC("time", getPost);
+
+      if (sortData !== null) {
+        return NextResponse.json({
+          response: sortData,
+        });
+      } else {
+        return NextResponse.json({
+          response: {
+            data: [],
+            message: "Empty Result",
+          },
+        });
       }
     }
     return NextResponse.json({ error: error.message, response: [] });
