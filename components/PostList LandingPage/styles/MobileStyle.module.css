@@ -1,0 +1,42 @@
+.postListContainer {
+    width: 100%;
+    height: fit-content;
+  }
+  .postListHeader {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 5vw 0;
+  }
+  .postListHeader h1 {
+    font-size: 5vw;
+    font-weight: 500;
+    margin-bottom: 5vw;
+  }
+  .postListHeaderButton {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .postListHeaderButton button {
+    font-size: 3vw;
+    padding: 3vw;
+  }
+  
+  .postListHeaderButton span {
+    display: none;
+  }
+  .postList {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
