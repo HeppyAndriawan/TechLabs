@@ -1,3 +1,4 @@
+
 import React from 'react'
 import Link from 'next/link'
 import { SwitchTo } from '@/tool/Switch/Switch'
@@ -32,8 +33,6 @@ export default function NavBar() {
   const { data: session, status } = useSession();
   
   return (
-   
-
     <div>
       <nav className="bg-black fixed top-0 w-full z-10" >
   <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -57,22 +56,31 @@ export default function NavBar() {
           </SwitchTo>
           </div>
         </div>
-      </div>
-      <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
+        <div className="sm:hidden" id="mobile-menu">
+          <div className="space-y-1 px-2 pb-3 pt-2">
+            <a
+              href="my_account"
+              className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+              aria-current="page"
+            >
+              My account
+            </a>
+            <a
+              href="login"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+            >
+              Log in
+            </a>
+            <a
+              href="signup"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+            >
+              Sign up
+            </a>
           </div>
+        </div>
+      </nav>
     </div>
-  </div>
-
-
-  <div className="sm:hidden" id="mobile-menu">
-    <div className="space-y-1 px-2 pb-3 pt-2">
-  
-      <a href="my_account" className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">My account</a>
-      <a href="login" className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Log in</a>
-      <a href="signup" className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Sign up</a>
-    </div>
-  </div>
-  </nav>
-  </div>
-  )
+  );
 }

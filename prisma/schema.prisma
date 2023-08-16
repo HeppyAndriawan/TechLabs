@@ -29,12 +29,13 @@ model User {
 model Post {
   id     String  @id @default(auto()) @map("_id") @db.ObjectId
   User   User?   @relation(fields: [userId], references: [id])
-  userId String? @db.ObjectId
+  userId String? @unique @db.ObjectId
 
+  user        String
   image       String?
   title       String
   information String
-  time        String[]
+  time        String
   likes       Likes[]
 }
 

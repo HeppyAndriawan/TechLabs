@@ -8,12 +8,10 @@ import Footer from "@/components/Footer/Footer";
 export default function Home() {
   const { data: session, status } = useSession();
   return (
-    <>
     <NavBar/>
     <Hero/>
     <PostList/>
     <Footer />    
     </>
   )  
-}
 

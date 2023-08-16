@@ -38,3 +38,21 @@
   align-items: flex-start;
   justify-content: flex-start;
 }
+
+.postListEmptyContainer{
+  width: 100%;
+  height: 50dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.postListEmpty{
+  width: fit-content;
+  height: fit-content;
+}
+.postListEmpty h1{
+  font-size: 12px;
+  font-weight: 300;
+  color: #6b7280;
+}

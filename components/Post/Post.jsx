@@ -1,37 +1,120 @@
-import React from "react";
+"use client";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import Carousel from "../Carousel/Carousel";
 import Capitalize from "@/tool/Capitalize/Capitalize";
+import { DropDownMenu } from "../DropDownMenu/DropDownMenu";
+import { SwitchTo } from "@/tool/Switch/Switch";
+import {
+  DotsVerticalIcon,
+  Pencil2Icon,
+  TrashIcon,
+} from "@radix-ui/react-icons";
+import axios from "axios";
+import { useSWRConfig } from "swr";
+import PostFormEdit from "../PostFormEdit/PostFormEdit";
+import { useGetPostData } from "../PostFormEdit/store/store";
+import DialogBox from "../DialogBox/DialogBox";
+import { useDialogEditPost } from "../DialogBox/store/store";
 import MediaQuery from "@/tool/MediaQuery/MediaQuery";
 import $ from 'jquery';
 import { desktop, tablet, mobile } from "./styles/styles";
 
- 
 export default function Post(props) {
   const { styles } = MediaQuery(desktop, tablet, mobile, tablet);
-  const postData =[
-    
-  ]
+  const user = JSON.parse(props.data.user);
+  const { cache, mutate, ...extraConfig } = useSWRConfig();
+
+  // Delete Post
+  const deletePostHendeler = async (id) => {
+    console.log(id);
+
+    const findBy = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      params: {
+        id: id,
+      },
+    };
+
+    await axios
+      .delete(`/api/post`, findBy)
+      .then(async function (response) {
+        if (response.data.response.error) {
+          return [];
+        }
+        setTimeout(() => {
+          mutate("USER_POST");
+        }, 500);
+        return [response.data.response];
+      })
+      .catch(function (error) {
+        console.log(`It's an Error : ${error.message}`);
+        return null;
+      });
+  };
+
+   // Dialog Store
+   const dialog = useDialogEditPost((state) => state.isDialogOpen);
+   const updateDialog = useDialogEditPost((state) => state.updateDialog);
+   const resetDialog = useDialogEditPost((state) => state.resetDialog);
+
+  // Post Data Store
+  const updatePostData = useGetPostData((state) => state.updatePostData);
+
+  // Trigger New Post
+  const editPostHendeler = (data) => {
+    setTimeout(() => {
+      updateDialog(true);
+      updatePostData(data);
+    }, 500);
+  };
+
+  // DropDown Button Data
+  const dropDown = {
+    button: <DotsVerticalIcon />,
+    section: [
+      {
+        title: "Option",
+        list: [
+          {
+            name: "Edit",
+            action: () => editPostHendeler(props.data),
+            icon: <Pencil2Icon />,
+          },
+          {
+            name: "Delete",
+            action: () => deletePostHendeler(props.data.id),
+            icon: <TrashIcon />,
+          },
+        ],
+      },
+    ],
+  };
+  
   return (
     styles !== null && (
       <div className={styles.container}>
         <div className={styles.postContainer}>
           <div className={styles.postHeader}>
             <div className={styles.postUserProfile.container}>
-              <Image
-                className={styles.postUserProfile.image}
-                src={props.data.user.image}
-                width={55}
-                height={55}
-                alt="Picture Profile"
-              />
+              <div className={styles.postUserProfile.imageProfile.constainer}>
+                <Suspense>
+                  <Image
+                    className={styles.postUserProfile.imageProfile.image}
+                    src={`${JSON.parse(user.image)}`}
+                    width={0}
+                    height={0}
+                    alt="Picture Profile"
+                  />
+                </Suspense>
+              </div>
               <div className={styles.postUserProfile.info.container}>
-                <h1 className={styles.postUserProfile.info.h1}>
-                {props.data.user.name}
-                </h1>
+                <h1 className={styles.postUserProfile.info.h1}>{user.name}</h1>
                 <p className={styles.postUserProfile.info.p}>
-                  {Capitalize("single", props.data.user.role)}
-                  </p>
+                  {Capitalize("single", user.role)}
+                </p>
               </div>
             </div>
             <div className={styles.postUserProfile.button.container}>
@@ -41,13 +124,13 @@ export default function Post(props) {
             </div>
           </div>
           <div className={styles.postUserProfile.image.container}>
-            <Carousel data={props.data.images}/>
+            <Carousel button={props.button} data={JSON.parse(props.data.image)} />
           </div>
           <div className={styles.postSaparator}></div>
           <div className={styles.postDescription.container}>
-            <h1 className={styles.postDescription.h1}>About Person</h1>
+            <h1 className={styles.postDescription.h1}>{props.data.title}</h1>
             <p className={styles.postDescription.p}>
-              {$`{props.data.description.substring(0, 150)}`}
+              {`${props.data.information.substring(0, 150)}...`}
             </p>
           </div>
           <div className={styles.postSaparator}></div>
@@ -93,6 +176,19 @@ export default function Post(props) {
               </svg>
               <button className={styles.postButton.button}>Message</button>
             </div>
+            <SwitchTo condition={props.edit === true}>
+              <div className={styles.postButton.buttonWrap}>
+                <DropDownMenu data={dropDown} />
+                <DialogBox
+                  title="Edit Post"
+                  subTitle="let's start to share ideas with others, and show your creativity."
+                  open={dialog}
+                  openChange={resetDialog}
+                >
+                  <PostFormEdit />
+                </DialogBox>
+              </div>
+            </SwitchTo>
           </div>
         </div>
       </div>
@@ -100,4 +196,11 @@ export default function Post(props) {
   );
 }
 
-//  Create responsive design wih media query component
+/**
+ * 1. How To Use
+ * <Post data={info} />
+ */
+
+/**
+ * PLEASE CREATE EDIT POST AND PUSH TO GITHUB
+ */

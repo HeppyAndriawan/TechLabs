@@ -6,4 +6,3 @@ export default function Signup() {
   return (
     <TestSignUp/>
   )
-}

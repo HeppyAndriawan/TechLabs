@@ -10,15 +10,18 @@ import Carousel from "../Carousel/Carousel";
 import ShortBTN from "../ShortBTN/ShortBTN";
 import { SwitchTo } from "@/tool/Switch/Switch";
 import axios from "axios";
-import { useDialog } from "../DialogBox/store/store";
+import { useDialogEditPost } from "../DialogBox/store/store";
+import { useGetPostData } from "./store/store";
 import MediaQuery from "@/tool/MediaQuery/MediaQuery";
 import { desktop, tablet, mobile } from "./styles/styles";
 
-export default function PostForm() {
+export default function PostFormEdit() {
   const context = useAppContext();
   const { cache, mutate, ...extraConfig } = useSWRConfig();
-  const user = cache.get("USER_LIST").data;
   const { styles } = MediaQuery(desktop, tablet, mobile, tablet);
+
+  // Post Data Store
+  const postData = useGetPostData((state) => state.postData);
 
   // Reach Hook Form
   const {
@@ -94,6 +97,16 @@ export default function PostForm() {
     }
   }, [image]);
 
+  // Set Input Original Value
+  useEffect(() => {
+    if (postData.length !== 0) {
+      let defaultValues = {};
+      defaultValues.post_title = postData.title;
+      defaultValues.post_description = postData.information;
+      reset({ ...defaultValues });
+    }
+  }, [postData.length]);
+
   // Title Continue Hendeler
   const titleContinue = () => {
     if (watch("post_title") === undefined || watch("post_title") === "") {
@@ -123,26 +136,30 @@ export default function PostForm() {
     ) {
       setIsImage(false);
       setIsPreview(true);
+    } else if (watch("post_images").length === 0) {
+      setPostImages(JSON.parse(postData.image));
+      setIsImage(false);
+      setIsPreview(true);
     }
-    return;
   };
 
   // Dialog Store
-  const resetDialog = useDialog((state) => state.resetDialog);
+  const dialog = useDialogEditPost((state) => state.isDialogOpen);
+  const resetDialog = useDialogEditPost((state) => state.resetDialog);
+
+  // Post Data Store
+  const resetPostData = useGetPostData((state) => state.resetPostData);
+  useEffect(() => {
+    dialog === false && resetPostData();
+  }, [dialog]);
 
   // Save Post Hendeler
   const savePostHendeler = async (dataForm) => {
     setIsPostButtonActive(true);
     new Promise((resolve) => {
       const time = new Date().getTime();
-      const userProfile = {
-        image: JSON.stringify(user[0].image),
-        name: user[0].name,
-        role: user[0].account_type,
-      };
       const newPost = {
-        userId: `${user[0].id}`,
-        user: JSON.stringify(userProfile),
+        ...postData,
         title: dataForm.post_title,
         information: dataForm.post_description,
         image: JSON.stringify(postImages),
@@ -156,7 +173,7 @@ export default function PostForm() {
       };
 
       await axios
-        .post(`/api/post`, response, {
+        .patch(`/api/post?id=${response.id}`, response, {
           headers: headers,
         })
         .then(function (response) {
@@ -175,13 +192,14 @@ export default function PostForm() {
             context.sendWarning(
               "default",
               "Success",
-              "Your post has been submitted to the public successfully."
+              "Your post has been edited and submit to the public successfully."
             );
 
             reset(
               {
                 post_title: "",
                 post_description: "",
+                post_images: [],
               },
               {
                 keepErrors: true,
@@ -192,10 +210,11 @@ export default function PostForm() {
                 keepSubmitCount: false,
               }
             );
-            
+
             setTimeout(() => {
               mutate("USER_POST");
             }, 500);
+
             resetDialog();
           }
         })
@@ -301,7 +320,16 @@ export default function PostForm() {
           </SwitchTo>
           <SwitchTo condition={isImage === true}>
             <div className={styles.input.container}>
-              <Label>Images *</Label>
+              <Label>
+                Images ({" "}
+                {postData?.image !== undefined &&
+                  JSON.parse(postData?.image)?.length}{" "}
+                image
+                {postData?.image !== undefined &&
+                  JSON.parse(postData.image).length > 1 &&
+                  "s"}{" "}
+                detected )
+              </Label>
               <Input
                 type="file"
                 multiple
@@ -317,7 +345,6 @@ export default function PostForm() {
                 onClick={() => {
                   setIsDescription(true);
                   setIsImage(false);
-                  setPostImages([]);
                 }}
               />
               <ShortBTN
