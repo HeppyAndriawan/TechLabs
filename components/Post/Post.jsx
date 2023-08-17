@@ -101,11 +101,11 @@ export default function Post(props) {
           <div className={styles.postHeader}>
             <div className={styles.postUserProfile.container}>
               <div className={styles.postUserProfile.imageProfile.constainer}>
-                {image === null && (
+                {image !== "null" && (
                   <Suspense>
                     <Image
                       className={styles.postUserProfile.imageProfile.image}
-                      src={`${JSON.parse(user.image)}`}
+                      src={`${image}`}
                       width={0}
                       height={0}
                       alt="Picture Profile"

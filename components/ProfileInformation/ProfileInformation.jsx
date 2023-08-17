@@ -52,6 +52,9 @@ export default function ProfileInformation() {
   // Fetch Data user
   const { data, isLoading } = useSWR("USER_LIST", getUserProfile);
 
+  // Image Profile
+  const profileImage =   data !== undefined && data !== null && data[0].image
+
   return (
     styles !== null &&
     data !== undefined && (
@@ -77,7 +80,7 @@ export default function ProfileInformation() {
             <div className={styles.profileImageProfile}>
               <SwitchTo condition={data[0]?.image !== null}>
                 <Image
-                  src="/imgExample/profile.jpg"
+                  src={profileImage}
                   width={100}
                   height={100}
                   alt="Picture of the author"

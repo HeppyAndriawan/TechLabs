@@ -18,6 +18,7 @@ import { desktop, tablet, mobile } from "./styles/styles";
 export default function PostFormEdit() {
   const context = useAppContext();
   const { cache, mutate, ...extraConfig } = useSWRConfig();
+  const user = cache.get("USER_LIST").data;
   const { styles } = MediaQuery(desktop, tablet, mobile, tablet);
 
   // Post Data Store
@@ -158,9 +159,15 @@ export default function PostFormEdit() {
     setIsPostButtonActive(true);
     new Promise((resolve) => {
       const time = new Date().getTime();
+      const userProfile = {
+        image: JSON.stringify(user[0].image),
+        name: user[0].name,
+        role: user[0].account_type,
+      };
       const newPost = {
         ...postData,
         title: dataForm.post_title,
+        user: JSON.stringify(userProfile),
         information: dataForm.post_description,
         image: JSON.stringify(postImages),
         time: `${time}`,

@@ -15,7 +15,7 @@ const desktop ={
         },
         imageProfile: {
             constainer:"w-[55px] h-[55px] relative overflow-hidden",
-            image:"w-auto h-auto",
+            image:"w-auto h-[55px] object-cover",
         },
         image:{
             container: "w-full h-fit",
@@ -50,7 +50,7 @@ tablet={
         },
         imageProfile: {
             constainer:"w-[55px] h-[55px] relative overflow-hidden",
-            image:"w-auto h-auto",
+            image:"w-auto h-[55px] object-cover",
         },
         image:{
             container: "w-full h-fit",
@@ -85,7 +85,7 @@ mobile={
         },
         imageProfile: {
             constainer:"w-[55px] h-[55px] relative overflow-hidden",
-            image:"w-auto h-auto",
+            image:"w-auto h-[55px] object-cover",
         },
         image:{
             container: "w-full h-fit",

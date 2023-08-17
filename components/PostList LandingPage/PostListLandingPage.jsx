@@ -46,7 +46,7 @@ export default function PostList(props) {
 
   // Fetch Data user
   const { data, isLoading } = useSWR("USER_POST", getUserProfile);
-  console.log(data);
+  
   return (
     styles !== null && (
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

@@ -3,7 +3,6 @@ import { PrismaClient } from "@prisma/client";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next";
 import { SortDSC } from "@/tool/SortASC/SortASC";
-import { Key } from "lucide-react";
 
 const prisma = new PrismaClient();
 
@@ -12,7 +11,6 @@ export async function GET(request, res) {
   const { searchParams } = new URL(request.url);
   const email = searchParams.get("email");
   const key = searchParams.get("key");
-  console.log(searchParams);
 
   try {
     if (session) {
