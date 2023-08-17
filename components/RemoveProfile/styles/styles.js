@@ -4,7 +4,7 @@ const desktop = {
     header: {
       container:"mb-[2vw]",
       h1: "text-gray-800 text-2xl font-semibold",
-      p: "text-gray-500 text-sm font-medium",
+      p: "w-[50%] text-gray-500 text-sm font-medium text-red-500",
     },
     form: {
       container: "w-full h-fit pt-[1vw]] mb-[2vw]",
@@ -29,7 +29,7 @@ tablet = {
     header: {
       container:"mb-[4vw]",
       h1: "text-gray-800 text-2xl font-semibold",
-      p: "text-gray-500 text-sm font-medium",
+      p: "w-[80%] text-gray-500 text-sm font-medium text-red-500",
     },
     form: {
       container: "w-full h-fit pt-[1vw]] mb-[2vw]",
@@ -54,7 +54,7 @@ mobile = {
     header: {
       container:"mb-[10vw]",
       h1: "text-gray-800 text-2xl font-semibold",
-      p: "text-gray-500 text-sm font-medium",
+      p: "text-gray-500 text-sm font-medium text-red-500",
     },
     form: {
       container: "w-full h-fit pt-[1vw]] mb-[2vw]",
@@ -75,3 +75,4 @@ mobile = {
 }
 
 module.exports = { desktop, tablet, mobile };
+

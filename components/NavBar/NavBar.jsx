@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { SwitchTo } from "@/tool/Switch/Switch";
 import { useSession, signOut } from "next-auth/react";
 
@@ -15,6 +16,7 @@ function Navi() {
 }
 
 export default function NavBar() {
+  const router = useRouter()
   const { data: session, status } = useSession();
 
   return (
@@ -25,20 +27,26 @@ export default function NavBar() {
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden"></div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
-                <img className=" w-1/4 invert" src="/images/logo192.png" />
+                <img className=" w-1/4 invert cursor-pointer" src="/images/logo192.png" onClick={()=> router.push("/")}/>
               </div>
               <div className="absolute right-0 hidden sm:ml-6 sm:block self-center">
-                <div className="space-x-2.5 hover:space-x-8">
+                <div className="space-x-2.5">
                   <SwitchTo condition={status === "authenticated"}>
                     <a
-                      href="my_account"
+                      href="/my_account"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                     >
                       My account
                     </a>
                     <a
-                      onClick={()=>signOut()}
+                      href="/my_account/setting"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      Setting
+                    </a>
+                    <a
+                      onClick={()=>signOut()}
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
                     >
                       Sign Out
                     </a>
