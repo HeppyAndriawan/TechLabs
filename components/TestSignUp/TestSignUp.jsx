@@ -1,8 +1,9 @@
+"use client";
 import React from 'react'
 import Link from 'next/link'
-import { SwitchTo } from '@/tool/Switch/Switch'
+
 import { useSession } from "next-auth/react";
-import { data } from 'jquery';
+
 
 function Navi () {
   return (
@@ -13,7 +14,7 @@ function Navi () {
 }
 
 export default function TestSignUp () {
-  const{data:session, status}=useSession()
+
     return (
       <div className=" flex">
       <img className= "w-1/2   h-screen  " src="/images/signup.jpg"/>
@@ -49,9 +50,9 @@ export default function TestSignUp () {
         <div className="flex items-center justify-between py-3 ">
           <label for="password" className="block text-sm font-medium leading-6 text-gray-900">Password*</label>
           <div className="text-sm">
-          <SwitchTo condition={status === "unauthenticated"}>
-            <a href="#" className="font-semibold text-black hover: text-black">Forgot password?</a>
-            </SwitchTo>
+          
+            <a href="forgotpassword" className="font-semibold text-black hover: text-black">Forgot password?</a>
+           
           </div>
         </div>
         <div className="mt-2">
