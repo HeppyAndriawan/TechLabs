@@ -1,22 +1,34 @@
+import React from 'react'
+import Link from 'next/link'
+import { SwitchTo } from '@/tool/Switch/Switch'
+import { useSession } from "next-auth/react";
+import { data } from 'jquery';
+
+function Navi () {
+  return (
+    
+    <Link href="/signup"> Forgot password </Link>
+        
+  )
+}
+
 export default function TestSignUp () {
+  const{data:session, status}=useSession()
     return (
       <div className=" flex">
       <img className= "w-1/2   h-screen  " src="/images/signup.jpg"/>
       <div className="space-x-2.5 hover:space-x-8 absolute right-0"> 
-      <div><a href="login" className="text-black hover:bg-gray-700 hover:text-black rounded-md px-3 py-2 text-sm font-medium">Log in</a>
-            <a href="signup" className="bg-black text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Sign up</a>
-       </div>
        </div>
   <div className="w-1/2  content-center mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form className="px-8" action="#" method="POST">
+        <form className="px-8" action="#" method="POST">
 
     <div>
         <img className="sm:mx-auto  flex-1 w-64 w-40  pb-px px-6  justify-center" src="/images/logo192.png"/>
        <h1 className=" px-8 text-gray-800 text-2xl font-semibold">Join our community</h1>
        <h2 className="py-3 px-8 text-gray-500 text-sm font-medium">Start your journey with our product</h2>
        </div>   
-    <div class="inline-block relative w-64"></div>
-    <label class="py-3 block text-sm font-medium leading-6 text-gray-900"> Account type* </label>
+       <div class="inline-block relative w-64"></div>
+       <label class="py-3 block text-sm font-medium leading-6 text-gray-900"> Account type* </label>
        <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
          <option>Desighner</option>
          <option>Tailor</option>
@@ -37,7 +49,9 @@ export default function TestSignUp () {
         <div className="flex items-center justify-between py-3 ">
           <label for="password" className="block text-sm font-medium leading-6 text-gray-900">Password*</label>
           <div className="text-sm">
+          <SwitchTo condition={status === "unauthenticated"}>
             <a href="#" className="font-semibold text-black hover: text-black">Forgot password?</a>
+            </SwitchTo>
           </div>
         </div>
         <div className="mt-2">
@@ -48,12 +62,12 @@ export default function TestSignUp () {
       <div>
         <button type="submit" className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign up</button>
       </div>
-    </form>
+     </form>
 
-    <p className="mt-10 text-center text-sm text-gray-500">
+     <p className="mt-10 text-center text-sm text-gray-500">
       Already have an account?
       <a href="#" className="font-semibold leading-6 text-black hover:text-black"> Sign in </a>
-    </p>
+     </p>
   </div>
 
   </div>  
