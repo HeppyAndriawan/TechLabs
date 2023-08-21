@@ -54,10 +54,11 @@ export default function EditLogin(props) {
       dataUser[0].password
     );
     if (confirm !== true) {
+      setIsRegisterButtonActive(false);
       context.sendWarning(
         "alert",
         "Denied",
-        "Credential confirmation is not confirm, please try again"
+        "Old password confirmation is not confirm, please try again"
       );
       reset(
         {

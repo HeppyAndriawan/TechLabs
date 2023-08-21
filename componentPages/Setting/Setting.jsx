@@ -6,6 +6,7 @@ import axios from "axios";
 import { TabMenu } from "@/components/TabMenu/TabMenu";
 import EditProfile from "@/components/EditProfile/EditProfile";
 import EditLogin from "@/components/EditLogin/EditLogin";
+import RemoveProfile from "@/components/RemoveProfile/RemoveProfile";
 import MediaQuery from "@/tool/MediaQuery/MediaQuery";
 import { desktop, tablet, mobile } from "./styles/styles";
 
@@ -58,6 +59,10 @@ export default function Setting() {
     {
       title: "Login",
       component: <EditLogin />,
+    },
+    {
+      title: "Delete",
+      component: <RemoveProfile />,
     },
   ];
 

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import MediaQuery from "@/tool/MediaQuery/MediaQuery";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import axios from "axios";
 import useSWR from "swr";
 import Image from "next/image";
@@ -52,6 +52,9 @@ export default function ProfileInformation() {
   // Fetch Data user
   const { data, isLoading } = useSWR("USER_LIST", getUserProfile);
 
+  // Image Profile
+  const profileImage =   data !== undefined && data !== null && data[0].image
+
   return (
     styles !== null &&
     data !== undefined && (
@@ -77,7 +80,7 @@ export default function ProfileInformation() {
             <div className={styles.profileImageProfile}>
               <SwitchTo condition={data[0]?.image !== null}>
                 <Image
-                  src="/imgExample/profile.jpg"
+                  src={profileImage}
                   width={100}
                   height={100}
                   alt="Picture of the author"

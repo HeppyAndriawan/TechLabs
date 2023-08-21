@@ -51,14 +51,15 @@
   width: 17vw;
   height: 24vw;
   display: flex;
+  justify-content: center;
   align-items: center;
   box-shadow: -1px 2px 15px -1px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
 }
 .profileImageProfileContainer img {
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 24vw;
   object-fit: cover;
 }
 

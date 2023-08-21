@@ -6,7 +6,7 @@ export function TabMenu(props) {
   const data = props.data;
 
   const desktop = {
-    container: "w-fit",
+    container: "w-full",
   },
   tablet = {
     constainer: "w-full",
@@ -18,7 +18,7 @@ export function TabMenu(props) {
   const { styles } = MediaQuery(desktop, tablet, mobile, tablet);
   return styles !== null && (
     <Tabs defaultValue={props.default.toLowerCase()} className={styles.container}>
-      <TabsList className="grid w-fit grid-cols-2">
+      <TabsList className="grid w-fit grid-cols-3">
         {data.map((info) => (
           <TabsTrigger key={info.title} value={info.title.toLowerCase()}>
             {info.title}
@@ -28,7 +28,7 @@ export function TabMenu(props) {
       {data.map((info) => (
         <TabsContent key={info.title} value={info.title.toLowerCase()}>
           <Card>
-            <CardContent className="space-y-2">{info.component}</CardContent>
+            <CardContent className="space-y-3">{info.component}</CardContent>
           </Card>
         </TabsContent>
       ))}

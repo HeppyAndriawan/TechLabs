@@ -1,16 +1,10 @@
-import React from "react";
+import MediaQuery from "@/tool/MediaQuery/MediaQuery";
 import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import Post from "../Post/Post";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import useSWR from "swr";
-import { Separator } from "@/components/ui/separator";
-import { PlusIcon } from "@radix-ui/react-icons";
-import DialogBox from "../DialogBox/DialogBox";
-import PostForm from "../PostForm/PostForm";
-import { useDialog } from "../DialogBox/store/store";
 import { SwitchTo } from "@/tool/Switch/Switch";
-import MediaQuery from "@/tool/MediaQuery/MediaQuery";
 import desktop from "./styles/DesktopStyle.module.css";
 import tablet from "./styles/TabletStyle.module.css";
 import mobile from "./styles/MobileStyle.module.css";
@@ -19,21 +13,16 @@ export default function PostList(props) {
   const { styles } = MediaQuery(desktop, tablet, mobile, tablet);
   const { data: session, status } = useSession();
 
-  /* Henriette ----------------------------------------------- */
   // Fetch Function
   const getUserProfile = async () => {
-    return new Promise((resolve) => {
-      // Key Session
-      const key = atob(session.user.key);
-      resolve(key);
-    }).then(async (response) => {
+    return new Promise(async (resolve) => {
       // Execute Fetch
       const findBy = {
         headers: {
           "Content-Type": "application/json",
         },
         params: {
-          email: response,
+          key: process.env.NEXT_PUBLIC_API_KEY,
         },
       };
 
@@ -49,31 +38,20 @@ export default function PostList(props) {
           console.log(`It's an Error : ${error.message}`);
           return null;
         });
-
-      return userdata;
+      resolve(userdata);
+    }).then(async (response) => {
+      return response;
     });
   };
 
   // Fetch Data user
   const { data, isLoading } = useSWR("USER_POST", getUserProfile);
-  /* Henriette end ----------------------------------------------- */
-
-  // Dialog Store
-  const dialog = useDialog((state) => state.isDialogOpen);
-  const updateDialog = useDialog((state) => state.updateDialog);
-  const resetDialog = useDialog((state) => state.resetDialog);
-
-  // Trigger New Post
-  const createNewPost = () => {
-    setTimeout(() => {
-      updateDialog(true);
-    }, 500);
-  };
+  
   return (
     styles !== null && (
-      <div className={styles.postListContainer}>
+      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className={styles.postListHeader}>
-          <h1>{props.title}</h1>
+          <h1>{props.title}Our designs</h1>
           <div className={styles.postListHeaderButton}>
             <span>Sort By:</span>
             <Menubar>
@@ -88,20 +66,9 @@ export default function PostList(props) {
                 </MenubarTrigger>
               </MenubarMenu>
             </Menubar>
-            <Separator orientation="vertical" className="mx-2" />
-            <Menubar>
-              <MenubarMenu>
-                <MenubarTrigger
-                  className="cursor-pointer"
-                  onClick={() => createNewPost(true)}
-                >
-                  <PlusIcon className="mr-1" /> Create Post
-                </MenubarTrigger>
-              </MenubarMenu>
-            </Menubar>
           </div>
         </div>
-        <div className={styles.postList}>
+        <div className="w-full flex flex-row flex-wrap justify-between">
           <SwitchTo condition={data !== undefined && data?.length === 0}>
             <div className={styles.postListEmptyContainer}>
               <div className={styles.postListEmpty}>
@@ -110,24 +77,26 @@ export default function PostList(props) {
             </div>
           </SwitchTo>
 
-          {/* Henriette ----------------------------------------------- */}
           <SwitchTo condition={data !== undefined && data?.length >= 1}>
-            {data !== undefined && data !== null &&
+            {data !== undefined &&
+              data !== null &&
               data.map((info, index) => (
                 <Post key={index} data={info} button={false} edit />
               ))}
           </SwitchTo>
-          {/* Henriette end  ----------------------------------------------- */}
         </div>
-        <DialogBox
-          title="Create Post"
-          subTitle="let's start to share ideas with others, and show your creativity."
-          open={dialog}
-          openChange={resetDialog}
-        >
-          <PostForm />
-        </DialogBox>
       </div>
     )
   );
+}
+
+{
+  /* 
+margin bottom mb-5
+padding bottom pb-5
+space-y-5 -> geht alles nicht
+wie kann ich Abstand nach unten machen?
+
+mr-[1vw] in styles Post, daher Abstand rechts 1, kann ich nicht auf 0 setzen
+*/
 }
