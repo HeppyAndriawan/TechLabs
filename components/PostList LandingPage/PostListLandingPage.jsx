@@ -50,10 +50,10 @@ export default function PostList(props) {
   return (
     styles !== null && (
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className={styles.postListHeader}>
-          <h1>{props.title}Our designs</h1>
-          <div className={styles.postListHeaderButton}>
-            <span>Sort By:</span>
+        <div className="w-full h-fit flex flex-row justify-between items-center py-10">
+          <h1 className="font-bold text-xl">{props.title}Our designs</h1>
+          <div className="w-fit h-fit flex flex-row justify-center items-center">
+            <span className="font-light text-l text-gray-600 mr-5">Sort By:</span>
             <Menubar>
               <MenubarMenu>
                 <MenubarTrigger className="cursor-pointer">
@@ -68,7 +68,7 @@ export default function PostList(props) {
             </Menubar>
           </div>
         </div>
-        <div className="w-full flex flex-row flex-wrap justify-between">
+        <div className="w-full flex flex-row flex-wrap justify-start pb-5">
           <SwitchTo condition={data !== undefined && data?.length === 0}>
             <div className={styles.postListEmptyContainer}>
               <div className={styles.postListEmpty}>
@@ -90,13 +90,18 @@ export default function PostList(props) {
   );
 }
 
-{
-  /* 
-margin bottom mb-5
-padding bottom pb-5
-space-y-5 -> geht alles nicht
-wie kann ich Abstand nach unten machen?
 
-mr-[1vw] in styles Post, daher Abstand rechts 1, kann ich nicht auf 0 setzen
-*/
+/* 
+  4. Post has no margin right, 
+  Inspect say:
+.nth-4n\:mr-0:nth-child(4n) {
+  margin-right: 0px;
 }
+*/
+
+/* 
+showing maximum 8 posts
+console.log(Post(0,7));
+
+to put in wich line?
+*/
